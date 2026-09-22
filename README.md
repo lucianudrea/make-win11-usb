@@ -1,8 +1,6 @@
 \# make-win11-usb
 
-
-
-A bash script for creating a bootable (UEFI/GPT + FAT32) Windows 11 USB stick from an ISO file. Works on both `apt`-based distros (Debian, Ubuntu) and `dnf`-based ones (Fedora, RHEL-like).
+A bash script for creating a bootable (UEFI/GPT + FAT32) Windows 11 USB stick from an ISO file. Works on both `apt`-based distros (Debian, Ubuntu) and `dnf`-based ones (Fedora, RHEL-like), splits install.wim/install.esd to work around the FAT32 4 GiB limit.
 
 
 
