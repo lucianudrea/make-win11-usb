@@ -1,10 +1,10 @@
-\# make-win11-usb
+# make-win11-usb
 
 A bash script for creating a bootable (UEFI/GPT + FAT32) Windows 11 USB stick from an ISO file. Works on both `apt`-based distros (Debian, Ubuntu) and `dnf`-based ones (Fedora, RHEL-like), splits install.wim/install.esd to work around the FAT32 4 GiB limit.
 
 
 
-\## Why `dd` alone doesn't work
+## Why `dd` alone doesn't work
 
 
 
@@ -14,25 +14,25 @@ Official Windows ISOs are not hybrid images, so `dd` or other raw-copy tools (Fe
 
 This script handles it by:
 
-\- formatting the USB stick as GPT + FAT32, with the partition marked ESP (`set 1 esp on`);
+- formatting the USB stick as GPT + FAT32, with the partition marked ESP (`set 1 esp on`);
 
-\- copying the ISO contents with `rsync`;
+- copying the ISO contents with `rsync`;
 
-\- splitting `install.wim` into pieces under 4 GiB (`install.swm`, `install2.swm`, ...);
+- splitting `install.wim` into pieces under 4 GiB (`install.swm`, `install2.swm`, ...);
 
-\- if the ISO ships `install.esd` instead of `install.wim` (happens with some Microsoft downloads), all editions inside are automatically converted to WIM before splitting.
-
-
-
-\## Requirements
+- if the ISO ships `install.esd` instead of `install.wim` (happens with some Microsoft downloads), all editions inside are automatically converted to WIM before splitting.
 
 
 
-\- Linux with `bash`, root access (`sudo`).
+## Requirements
 
-\- A valid Windows 11 ISO, downloaded from \[microsoft.com/software-download/windows11](https://www.microsoft.com/software-download/windows11).
 
-\- A USB stick (its contents will be \*\*completely erased\*\*).
+
+- Linux with `bash`, root access (`sudo`).
+
+- A valid Windows 11 ISO, downloaded from \[microsoft.com/software-download/windows11](https://www.microsoft.com/software-download/windows11).
+
+- A USB stick (its contents will be \*\*completely erased\*\*).
 
 
 
@@ -40,7 +40,7 @@ Package dependencies (`wimlib-imagex`/`wimtools`, `rsync`, `parted`, `dosfstools
 
 
 
-\## Usage
+## Usage
 
 
 
@@ -70,7 +70,7 @@ sudo ./make-win11-usb.sh ./Win11\_24H2\_English\_x64.iso /dev/sdc
 
 
 
-\## Identifying the right USB stick
+## Identifying the right USB stick
 
 
 
@@ -90,7 +90,7 @@ Look for the device with `TRAN=usb` and `RM=1`, matching your stick's size and m
 
 
 
-\## What the script does, step by step
+## What the script does, step by step
 
 
 
@@ -118,7 +118,7 @@ Look for the device with `TRAN=usb` and `RM=1`, matching your stick's size and m
 
 
 
-\## After the script finishes
+## After the script finishes
 
 
 
@@ -126,15 +126,15 @@ Only remove the USB stick after you see the final success message. At boot time,
 
 
 
-\## Known limitations
+## Known limitations
 
 
 
-\- The script does not bypass Windows 11's TPM/Secure Boot checks during installation; that's a separate step (registry edit during setup, or a bypass script).
+- The script does not bypass Windows 11's TPM/Secure Boot checks during installation; that's a separate step (registry edit during setup, or a bypass script).
 
-\- It does not create a multi-boot stick (multiple ISOs on the same drive); for that, use \[Ventoy](https://www.ventoy.net/) instead.
+- It does not create a multi-boot stick (multiple ISOs on the same drive); for that, use \[Ventoy](https://www.ventoy.net/) instead.
 
-\- Tested for `/dev/sdX`, `/dev/nvmeXnY`, and `/dev/mmcblkX`; other device naming schemes may need adjustments.
+- Tested for `/dev/sdX`, `/dev/nvmeXnY`, and `/dev/mmcblkX`; other device naming schemes may need adjustments.
 
 
 
