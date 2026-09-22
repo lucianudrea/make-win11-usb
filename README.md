@@ -138,7 +138,7 @@ Only remove the USB stick after you see the final success message. At boot time,
 
 
 
-License
+## License
 
 MIT — see LICENSE.
 
